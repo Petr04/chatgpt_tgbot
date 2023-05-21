@@ -5,6 +5,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BOT_TOKEN = os.environ.get('BOT_TOKEN')
+WEBHOOK_URL = 'https://2fb2-31-162-127-244.ngrok-free.app'
+WEBAPP_HOST = '0.0.0.0'
+WEBAPP_PORT = 8000
 CHATGPT_ORGANIZATION = os.environ.get('CHATGPT_ORGANIZATION')
 CHATGPT_TOKEN = os.environ.get('CHATGPT_TOKEN')
 YOOKASSA_ID = os.environ.get('YOOKASSA_ID')

@@ -15,6 +15,7 @@ Bot.set_current(bot)
 # storage = MemoryStorage()
 storage = RedisStorage2(**REDIS)
 dp = Dispatcher(bot, storage=storage)
+Dispatcher.set_current(dp)
 
 
 async def db_init():
