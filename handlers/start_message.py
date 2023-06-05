@@ -119,6 +119,6 @@ async def handle_more_about_limits(callback):
 
 @dp.callback_query_handler(text='back_to_start_message', state='*')
 async def handle_back_to_start_message(callback):
-  user = await User.get_or_create(id=callback.message.chat.id)
+  user, _ = await User.get_or_create(id=callback.message.chat.id)
   await callback.message.edit_text(
     **start_message_kwargs(callback.message.chat.first_name, user))

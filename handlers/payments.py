@@ -84,7 +84,8 @@ async def buy(message, state, text):
 
   await state.update_data(
     payment_ids=list(payment.id for payment in payments),
-    message=status_message
+    chat_id=status_message.chat.id,
+    message_id=status_message.message_id,
   )
 
 
@@ -108,16 +109,16 @@ async def handle_check_status(callback, state):
         f'На ваш баланс начислено {format_number(words)} слов.\n'
         f'*Баланс:* {format_number(user.balance)} слов',
         parse_mode=ParseMode.MARKDOWN,
-        chat_id=data['message'].chat.id,
-        message_id=data['message'].message_id,
+        chat_id=data['chat_id'],
+        message_id=data['message_id'],
       )
       break
     
     if status == 'error':
       await bot.edit_message_text(
         'Извините, что-то пошло не так. Чтобы решить вопрос, обращайтесь к @piotr_makarov.',
-        chat_id=data['message'].chat.id,
-        message_id=data['message'].message_id,
+        chat_id=data['chat_id'],
+        message_id=data['message_id'],
         reply_markup=InlineKeyboardMarkup().add(
           InlineKeyboardButton('Попробовать ещё раз', callback_data='check_payment_status')
         ),
@@ -127,8 +128,8 @@ async def handle_check_status(callback, state):
   else:
     await bot.edit_message_text(
       'Пока деньги не пришли. Попробуйте проверить чуть позже.',
-      chat_id=data['message'].chat.id,
-      message_id=data['message'].message_id,
+      chat_id=data['chat_id'],
+      message_id=data['message_id'],
       reply_markup=InlineKeyboardMarkup().add(
         InlineKeyboardButton('Попробовать ещё раз', callback_data='check_payment_status')
       ),
