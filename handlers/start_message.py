@@ -69,7 +69,7 @@ async def manage_args(message):
 
 
 @dp.message_handler(commands=['start', 'help'], state='*')
-async def handle_start(message, state):
+async def handle_start(message):
   await manage_args(message)
   # TODO: auto check balance
 
